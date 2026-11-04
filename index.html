@@ -396,48 +396,109 @@ function finJournee(){
 
 // ENREGISTREMENT JOURNEE
 function enregistrerJournee(){
- if(!debut){
-  alert("Enregistre d'abord ton début de journée.");
-  return;
- }
+ const hDebut = document.getElementById("heureDebutManuelle").value;
 
- let fin=Date.now();
+  const hFin = document.getElementById("heureFinManuelle").value;
 
- if(fin<debut){
-  alert("Erreur dans les horaires.");
-  return;
- }
+  let debutCalcul;
 
- let pause=Math.max(0,Number(document.getElementById("pause").value)||0);
- let duree=Math.max(0,(fin-debut)/3600000-pause/60);
+  let finCalcul;
 
- if(duree<=0){
-  alert("La durée de travail doit être positive.");
-  return;
- }
+  if(hDebut || hFin){
 
- let jour={
-  date:new Date(debut).toLocaleDateString("fr-FR"),
-  debut:new Date(debut).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}),
-  fin:new Date(fin).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}),
-  heures:duree,
-  pause:pause,
-  paniers:Math.max(0,Number(document.getElementById("nbPanier").value)||0),
-  pompages:Math.max(0,Number(document.getElementById("nbPompage").value)||0)
- };
+    if(!hDebut || !hFin){
 
- jours.push(jour);
- localStorage.setItem("joursChauffeur",JSON.stringify(jours));
+      alert("Renseigne les deux horaires manuels.");
 
- debut=0;
- localStorage.removeItem("debutChauffeur");
+      return;
 
- document.getElementById("message").textContent="Journée enregistrée avec succès !";
- document.getElementById("etat").textContent="Aucune journée commencée.";
+    }
 
- actualiser();
+    const maintenant = new Date();
+
+    debutCalcul = new Date(maintenant);
+
+    const [dh, dm] = hDebut.split(":").map(Number);
+
+    debutCalcul.setHours(dh, dm, 0, 0);
+
+    finCalcul = new Date(maintenant);
+
+    const [fh, fm] = hFin.split(":").map(Number);
+
+    finCalcul.setHours(fh, fm, 0, 0);
+
+    if(finCalcul <= debutCalcul){
+
+      finCalcul.setDate(finCalcul.getDate() + 1);
+
+    }
+
+  }else{
+
+    if(!debut){
+
+      alert("Enregistre ton début de journée ou saisis tes horaires.");
+
+      return;
+
+    }
+
+    debutCalcul = new Date(debut);
+
+    finCalcul = new Date();
+
+  }
+
+  let pause = Math.max(0, Number(document.getElementById("pause").value) || 0);
+
+  let duree = Math.max(0, (finCalcul - debutCalcul) / 3600000 - pause / 60);
+
+  if(duree <= 0){
+
+    alert("La durée de travail doit être positive.");
+
+    return;
+
+  }
+
+  let jour = {
+
+    date: debutCalcul.toLocaleDateString("fr-FR"),
+
+    debut: debutCalcul.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}),
+
+    fin: finCalcul.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}),
+
+    heures: duree,
+
+    pause: pause,
+
+    paniers: Math.max(0, Number(document.getElementById("nbPanier").value) || 0),
+
+    pompages: Math.max(0, Number(document.getElementById("nbPompage").value) || 0)
+
+  };
+
+  jours.push(jour);
+
+  localStorage.setItem("joursChauffeur", JSON.stringify(jours));
+
+  debut = 0;
+
+  localStorage.removeItem("debutChauffeur");
+
+  document.getElementById("heureDebutManuelle").value = "";
+
+  document.getElementById("heureFinManuelle").value = "";
+
+  document.getElementById("message").textContent = "Journée enregistrée avec succès !";
+
+  document.getElementById("etat").textContent = "Aucune journée commencée.";
+
+  actualiser();
+
 }
-
 // PARAMETRES
 function modifierParametres(){
  profil.taux=Number(document.getElementById("modTaux").value);
