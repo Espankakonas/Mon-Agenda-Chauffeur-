@@ -200,7 +200,51 @@ footer{text-align:center;color:#667d98;font-size:12px;margin-top:25px}
  </span>
 
 </section>
+<section class="card hidden" id="vehicule">
 
+<h2>Mon véhicule 🚛</h2>
+<p style="text-align:center;color:#91a9c5">
+Configure ton camion pour continuer
+</p>
+
+<label>Type de véhicule</label>
+<select id="categorie">
+<option value="Toupie">Toupie</option>
+<option value="Pompe à béton">Pompe à béton</option>
+<option value="PUMI">PUMI</option>
+</select>
+
+<label>Marque du camion</label>
+<select id="marque">
+<option>Mercedes</option>
+<option>Renault</option>
+<option>MAN</option>
+<option>Volvo</option>
+<option>Scania</option>
+<option>Autre</option>
+</select>
+
+<label>Modèle</label>
+<input id="modele" placeholder="Ex : Arocs, Actros, FMX">
+
+<label>Groupe de pompage</label>
+<select id="pompe">
+<option>Aucun</option>
+<option>Putzmeister</option>
+<option>Schwing</option>
+<option>CIFA</option>
+<option>Mecbo</option>
+<option>Autre</option>
+</select>
+
+<label>Numéro du camion</label>
+<input id="numero" placeholder="Ex : Camion 12">
+
+<button onclick="enregistrerVehicule()">
+ENREGISTRER ET CONTINUER
+</button>
+
+</section>
 <footer>
 
  MON AGENDA CHAUFFEUR © 2026
