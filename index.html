@@ -252,6 +252,32 @@ ENREGISTRER ET CONTINUER
 </footer>
 
 </main>
+function afficherVehicule(){
+ document.getElementById("connexion").classList.add("hidden");
+ document.getElementById("creation").classList.add("hidden");
+ document.getElementById("vehicule").classList.remove("hidden");
+}
+
+function enregistrerVehicule(){
+
+ let vehicule={
+  categorie:document.getElementById("categorie").value,
+  marque:document.getElementById("marque").value,
+  modele:document.getElementById("modele").value.trim(),
+  pompe:document.getElementById("pompe").value,
+  numero:document.getElementById("numero").value.trim()
+ };
+
+ if(!vehicule.modele){
+  alert("Indique le modèle de ton camion.");
+  return;
+ }
+
+ localStorage.setItem("vehiculeChauffeur",JSON.stringify(vehicule));
+
+ alert("Véhicule enregistré ! Bienvenue dans ton espace chauffeur.");
+
+}
 <script>
 
 function afficherCreation(){
