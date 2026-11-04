@@ -260,42 +260,24 @@ function creerCompte(){
 
 }
 
-function seConnecter(){
+ function seConnecter(){
 
  let email=document.getElementById("email").value.trim();
-
  let password=document.getElementById("password").value;
 
  let compte=JSON.parse(localStorage.getItem("compteChauffeur")||"null");
 
  if(!compte){
-
   alert("Crée d'abord ton compte.");
-
   return;
-
  }
 
  if(email!==compte.email||password!==compte.password){
-
   alert("Adresse e-mail ou mot de passe incorrect.");
-
   return;
-
  }
 
  alert("Bienvenue "+compte.nom+" !");
 
+ afficherVehicule();
 }
-
-function motDePasseOublie(){
-
- alert("La récupération du mot de passe sera activée avec le système de comptes en ligne.");
-
-}
-
-</script>
-
-</body>
-
-</html>
