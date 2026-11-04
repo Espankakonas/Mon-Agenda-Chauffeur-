@@ -1,353 +1,522 @@
+
 <!DOCTYPE html>
-
 <html lang="fr">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <meta name="theme-color" content="#080e19">
-
 <title>Mon Agenda Chauffeur</title>
 
 <style>
-
 *{box-sizing:border-box}
-
 body{
-
  margin:0;
-
  min-height:100vh;
-
  background:linear-gradient(160deg,#101f36,#060b14);
-
  color:white;
-
  font-family:Arial,sans-serif;
-
- display:flex;
-
- align-items:center;
-
- justify-content:center;
-
  padding:20px;
-
 }
-
-main{width:100%;max-width:430px}
-
-header{text-align:center;margin-bottom:30px}
-
+main{width:100%;max-width:500px;margin:auto}
+header{text-align:center;padding:20px 5px}
 .logo{
-
- width:115px;height:115px;
-
- margin:auto;
-
- border-radius:28px;
-
+ width:105px;height:105px;margin:auto;
+ border-radius:26px;
  background:linear-gradient(145deg,#168cff,#0751a8);
-
- display:flex;align-items:center;
-
- justify-content:center;
-
- font-size:65px;
-
- box-shadow:0 0 35px #168cff55;
-
+ display:flex;align-items:center;justify-content:center;
+ font-size:60px;
+ box-shadow:0 0 30px #168cff55;
 }
-
-h1{font-size:25px;color:#39a6ff;margin:20px 0 8px}
-
-header p{color:#91a9c5;font-size:12px;letter-spacing:2px}
-
+h1{font-size:24px;color:#39a6ff;margin:18px 0 8px}
+header p{color:#91a9c5;font-size:11px;letter-spacing:1.5px}
 .card{
-
- background:#142237;
-
- border:1px solid #29415e;
-
- border-radius:20px;
-
- padding:25px;
-
- box-shadow:0 15px 40px #0005;
-
+ background:#142237;border:1px solid #29415e;
+ border-radius:18px;padding:20px;margin:15px 0;
 }
-
-h2{margin-top:0;text-align:center}
-
-label{display:block;color:#b9cbe0;font-size:14px;margin-top:15px}
-
-input{
-
- width:100%;padding:15px;margin-top:7px;
-
+h2{margin-top:0;font-size:20px}
+h3{color:#39a6ff}
+label{display:block;color:#b9cbe0;font-size:14px;margin-top:14px}
+input,select{
+ width:100%;padding:14px;margin-top:7px;
  background:#091321;color:white;
-
- border:1px solid #38516e;
-
- border-radius:10px;font-size:16px;
-
+ border:1px solid #38516e;border-radius:10px;
+ font-size:16px;
 }
-
 button{
-
- width:100%;padding:15px;margin-top:17px;
-
+ width:100%;padding:15px;margin-top:12px;
  border:0;border-radius:11px;
-
  background:#168cff;color:white;
-
- font-size:16px;font-weight:bold;
-
+ font-size:15px;font-weight:bold;
+ cursor:pointer;
 }
-
 .secondary{background:#263d58}
-
+.danger{background:#923c48}
 .link{
-
  display:block;text-align:center;
-
- color:#49aaff;margin-top:18px;
-
- font-size:14px;
-
+ color:#49aaff;margin-top:18px;font-size:14px;
+ cursor:pointer;
 }
-
-.hidden{display:none}
-
-footer{text-align:center;color:#667d98;font-size:12px;margin-top:25px}
-
+.hidden{display:none!important}
+.stat{
+ background:#091321;padding:15px;
+ border-radius:12px;margin:9px 0;
+}
+.stat strong{color:#39b6ff;font-size:24px}
+.small{color:#91a9c5;font-size:12px}
+.row{
+ display:grid;grid-template-columns:1fr 1fr;gap:10px;
+}
+.history-item{
+ background:#091321;border-radius:10px;
+ padding:13px;margin:9px 0;
+ font-size:14px;line-height:1.7;
+}
+.status{
+ text-align:center;color:#39b6ff;
+ padding:8px;font-size:14px;
+}
+footer{text-align:center;color:#667d98;font-size:12px;padding:20px}
 </style>
-
 </head>
-<body>
 
+<body>
 <main>
 
 <header>
-
  <div class="logo">🚛</div>
-
  <h1>MON AGENDA CHAUFFEUR</h1>
-
  <p>POINTAGE • PANIERS • POMPAGES • SALAIRE</p>
-
 </header>
 
-<section class="card" id="connexion">
-
+<!-- CONNEXION -->
+<section id="connexion" class="card">
  <h2>Bienvenue chauffeur</h2>
-
- <p style="text-align:center;color:#91a9c5">
-
- Connecte-toi à ton espace personnel
-
- </p>
+ <p class="small">Connecte-toi à ton espace personnel.</p>
 
  <label>Adresse e-mail</label>
-
- <input type="email" id="email" placeholder="exemple@email.com">
+ <input id="email" type="email" placeholder="Ton adresse e-mail">
 
  <label>Mot de passe</label>
-
- <input type="password" id="password" placeholder="Ton mot de passe">
+ <input id="password" type="password" placeholder="Ton mot de passe">
 
  <button onclick="seConnecter()">SE CONNECTER</button>
-
- <span class="link" onclick="afficherCreation()">
-
- Créer mon compte
-
- </span>
-
- <span class="link" onclick="motDePasseOublie()">
-
- Mot de passe oublié ?
-
- </span>
-
+ <span class="link" onclick="afficher('creation')">Créer mon compte</span>
+ <span class="link" onclick="motDePasseOublie()">Mot de passe oublié ?</span>
 </section>
 
-<section class="card hidden" id="creation">
-
+<!-- CREATION DE COMPTE -->
+<section id="creation" class="card hidden">
  <h2>Créer mon compte</h2>
 
  <label>Nom et prénom</label>
-
  <input id="nom" placeholder="Ton nom">
 
  <label>Adresse e-mail</label>
-
  <input id="nouvelEmail" type="email" placeholder="Ton adresse e-mail">
 
- <label>Mot de passe</label>
-
+ <label>Mot de passe (8 caractères minimum)</label>
  <input id="nouveauPassword" type="password" placeholder="Créer un mot de passe">
 
  <button onclick="creerCompte()">CRÉER MON COMPTE</button>
+ <span class="link" onclick="afficher('connexion')">Retour à la connexion</span>
+</section>
 
- <span class="link" onclick="afficherConnexion()">
+<!-- CONFIGURATION VEHICULE -->
+<section id="vehicule" class="card hidden">
+ <h2>🚛 Mon véhicule</h2>
+ <p class="small">Configure ton camion pour accéder à ton agenda.</p>
 
- Retour à la connexion
+ <label>Type de véhicule</label>
+ <select id="categorie">
+  <option>Toupie</option>
+  <option>Pompe à béton</option>
+  <option>PUMI</option>
+ </select>
 
- </span>
+ <label>Marque du camion</label>
+ <select id="marque">
+  <option>Mercedes</option>
+  <option>Renault</option>
+  <option>MAN</option>
+  <option>Volvo</option>
+  <option>Scania</option>
+  <option>DAF</option>
+  <option>Iveco</option>
+  <option>Autre</option>
+ </select>
+
+ <label>Modèle</label>
+ <input id="modele" placeholder="Ex : Arocs, Actros, FMX">
+
+ <label>Groupe de pompage</label>
+ <select id="pompe">
+  <option>Aucun</option>
+  <option>Putzmeister</option>
+  <option>Schwing</option>
+  <option>CIFA</option>
+  <option>Mecbo</option>
+  <option>Autre</option>
+ </select>
+
+ <label>Numéro du camion</label>
+ <input id="numero" placeholder="Ex : Camion 12">
+
+ <h3>Mes paramètres de salaire</h3>
+
+ <label>Taux horaire brut (€)</label>
+ <input id="taux" type="number" step="0.01" value="12.80">
+
+ <label>Panier repas (€)</label>
+ <input id="panier" type="number" step="0.01" value="13">
+
+ <label>Prime par pompage (€)</label>
+ <input id="prime" type="number" step="0.01" value="10">
+
+ <button onclick="enregistrerVehicule()">ENREGISTRER ET CONTINUER</button>
+</section>
+
+<!-- TABLEAU DE BORD -->
+<section id="tableau" class="hidden">
+
+ <div class="card">
+  <h2>Mon tableau de bord</h2>
+  <p id="monCamion" class="small"></p>
+  <p id="date" class="status"></p>
+
+  <div class="stat">
+   <span class="small">Heures travaillées</span><br>
+   <strong id="heures">0 h</strong>
+  </div>
+
+  <div class="row">
+   <div class="stat">
+    <span class="small">Paniers</span><br>
+    <strong id="paniers">0</strong>
+   </div>
+   <div class="stat">
+    <span class="small">Pompages</span><br>
+    <strong id="pompages">0</strong>
+   </div>
+  </div>
+
+  <div class="stat">
+   <span class="small">Salaire brut estimé</span><br>
+   <strong id="salaire">0 €</strong>
+  </div>
+ </div>
+
+ <div class="card">
+  <h2>⏱️ Mon pointage</h2>
+  <p id="etat" class="status">Aucune journée commencée.</p>
+
+  <button onclick="debutJournee()">▶ DÉBUT DE JOURNÉE</button>
+  <button class="secondary" onclick="finJournee()">■ FIN DE JOURNÉE</button>
+
+  <label>Pause en minutes</label>
+  <input id="pause" type="number" value="30">
+
+  <label>Nombre de paniers</label>
+  <input id="nbPanier" type="number" value="1">
+
+  <label>Nombre de pompages</label>
+  <input id="nbPompage" type="number" value="0">
+
+  <button onclick="enregistrerJournee()">ENREGISTRER MA JOURNÉE</button>
+  <p id="message" class="status"></p>
+ </div>
+
+ <div class="card">
+  <h2>📅 Historique</h2>
+  <div id="historique"></div>
+ </div>
+
+ <div class="card">
+  <h2>⚙️ Mes paramètres</h2>
+
+  <label>Taux horaire brut (€)</label>
+  <input id="modTaux" type="number" step="0.01">
+
+  <label>Panier (€)</label>
+  <input id="modPanier" type="number" step="0.01">
+
+  <label>Prime par pompage (€)</label>
+  <input id="modPrime" type="number" step="0.01">
+
+  <button onclick="modifierParametres()">ENREGISTRER LES PARAMÈTRES</button>
+  <button class="secondary" onclick="modifierVehicule()">MODIFIER MON CAMION</button>
+  <button class="danger" onclick="deconnexion()">DÉCONNEXION</button>
+ </div>
 
 </section>
-<section class="card hidden" id="vehicule">
 
-<h2>Mon véhicule 🚛</h2>
-<p style="text-align:center;color:#91a9c5">
-Configure ton camion pour continuer
-</p>
-
-<label>Type de véhicule</label>
-<select id="categorie">
-<option value="Toupie">Toupie</option>
-<option value="Pompe à béton">Pompe à béton</option>
-<option value="PUMI">PUMI</option>
-</select>
-
-<label>Marque du camion</label>
-<select id="marque">
-<option>Mercedes</option>
-<option>Renault</option>
-<option>MAN</option>
-<option>Volvo</option>
-<option>Scania</option>
-<option>Autre</option>
-</select>
-
-<label>Modèle</label>
-<input id="modele" placeholder="Ex : Arocs, Actros, FMX">
-
-<label>Groupe de pompage</label>
-<select id="pompe">
-<option>Aucun</option>
-<option>Putzmeister</option>
-<option>Schwing</option>
-<option>CIFA</option>
-<option>Mecbo</option>
-<option>Autre</option>
-</select>
-
-<label>Numéro du camion</label>
-<input id="numero" placeholder="Ex : Camion 12">
-
-<button onclick="enregistrerVehicule()">
-ENREGISTRER ET CONTINUER
-</button>
-
-</section>
-<footer>
-
- MON AGENDA CHAUFFEUR © 2026
-
-</footer>
-
+<footer>MON AGENDA CHAUFFEUR © 2026</footer>
 </main>
-function afficherVehicule(){
- document.getElementById("connexion").classList.add("hidden");
- document.getElementById("creation").classList.add("hidden");
- document.getElementById("vehicule").classList.remove("hidden");
+
+<script>
+
+// DONNEES
+let compte = JSON.parse(localStorage.getItem("compteChauffeur") || "null");
+let profil = JSON.parse(localStorage.getItem("vehiculeChauffeur") || "null");
+let jours = JSON.parse(localStorage.getItem("joursChauffeur") || "[]");
+let debut = Number(localStorage.getItem("debutChauffeur") || 0);
+
+// NAVIGATION
+function afficher(id){
+ ["connexion","creation","vehicule","tableau"].forEach(function(page){
+  document.getElementById(page).classList.add("hidden");
+ });
+ document.getElementById(id).classList.remove("hidden");
 }
 
-function enregistrerVehicule(){
+// CREATION COMPTE
+function creerCompte(){
+ let nom=document.getElementById("nom").value.trim();
+ let email=document.getElementById("nouvelEmail").value.trim().toLowerCase();
+ let password=document.getElementById("nouveauPassword").value;
 
- let vehicule={
-  categorie:document.getElementById("categorie").value,
-  marque:document.getElementById("marque").value,
-  modele:document.getElementById("modele").value.trim(),
-  pompe:document.getElementById("pompe").value,
-  numero:document.getElementById("numero").value.trim()
- };
-
- if(!vehicule.modele){
-  alert("Indique le modèle de ton camion.");
+ if(!nom || !email || !password){
+  alert("Remplis tous les champs.");
   return;
  }
 
- localStorage.setItem("vehiculeChauffeur",JSON.stringify(vehicule));
-
- alert("Véhicule enregistré ! Bienvenue dans ton espace chauffeur.");
-
-}
-<script>
-
-function afficherCreation(){
-
- document.getElementById("connexion").classList.add("hidden");
-
- document.getElementById("creation").classList.remove("hidden");
-
-}
-
-function afficherConnexion(){
-
- document.getElementById("creation").classList.add("hidden");
-
- document.getElementById("connexion").classList.remove("hidden");
-
-}
-
-function creerCompte(){
-
- let nom=document.getElementById("nom").value.trim();
-
- let email=document.getElementById("nouvelEmail").value.trim();
-
- let password=document.getElementById("nouveauPassword").value;
-
- if(!nom||!email||!password){
-
-  alert("Remplis tous les champs.");
-
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+  alert("Adresse e-mail invalide.");
   return;
-
  }
 
  if(password.length<8){
-
-  alert("Le mot de passe doit contenir au moins 8 caractères.");
-
+  alert("Le mot de passe doit contenir 8 caractères minimum.");
   return;
-
  }
 
- let compte={nom,email,password};
-
+ compte={nom:nom,email:email,password:password};
  localStorage.setItem("compteChauffeur",JSON.stringify(compte));
+ localStorage.setItem("sessionChauffeur",email);
 
- alert("Compte créé ! Tu peux maintenant te connecter.");
-
- afficherConnexion();
-
+ profil=null;
+ afficher("vehicule");
 }
 
- function seConnecter(){
-
- let email=document.getElementById("email").value.trim();
+// CONNEXION
+function seConnecter(){
+ let email=document.getElementById("email").value.trim().toLowerCase();
  let password=document.getElementById("password").value;
-
- let compte=JSON.parse(localStorage.getItem("compteChauffeur")||"null");
 
  if(!compte){
   alert("Crée d'abord ton compte.");
   return;
  }
 
- if(email!==compte.email||password!==compte.password){
+ if(email!==compte.email || password!==compte.password){
   alert("Adresse e-mail ou mot de passe incorrect.");
   return;
  }
 
- alert("Bienvenue "+compte.nom+" !");
+ localStorage.setItem("sessionChauffeur",email);
 
- afficherVehicule();
+ profil=JSON.parse(localStorage.getItem("vehiculeChauffeur") || "null");
+
+ if(profil){
+  afficher("tableau");
+  actualiser();
+ }else{
+  afficher("vehicule");
+ }
 }
+
+// MOT DE PASSE OUBLIE
+function motDePasseOublie(){
+ alert("La récupération du mot de passe sera disponible avec le futur système de comptes en ligne.");
+}
+
+// VEHICULE
+function enregistrerVehicule(){
+ let modele=document.getElementById("modele").value.trim();
+
+ if(!modele){
+  alert("Indique le modèle de ton camion.");
+  return;
+ }
+
+ profil={
+  categorie:document.getElementById("categorie").value,
+  marque:document.getElementById("marque").value,
+  modele:modele,
+  pompe:document.getElementById("pompe").value,
+  numero:document.getElementById("numero").value.trim(),
+  taux:Number(document.getElementById("taux").value),
+  panier:Number(document.getElementById("panier").value),
+  prime:Number(document.getElementById("prime").value)
+ };
+
+ localStorage.setItem("vehiculeChauffeur",JSON.stringify(profil));
+
+ afficher("tableau");
+ actualiser();
+ alert("Ton véhicule est enregistré !");
+}
+
+function modifierVehicule(){
+ document.getElementById("categorie").value=profil.categorie;
+ document.getElementById("marque").value=profil.marque;
+ document.getElementById("modele").value=profil.modele;
+ document.getElementById("pompe").value=profil.pompe;
+ document.getElementById("numero").value=profil.numero;
+ document.getElementById("taux").value=profil.taux;
+ document.getElementById("panier").value=profil.panier;
+ document.getElementById("prime").value=profil.prime;
+ afficher("vehicule");
+}
+
+// POINTAGE
+function debutJournee(){
+ if(debut){
+  alert("Une journée est déjà commencée.");
+  return;
+ }
+
+ debut=Date.now();
+ localStorage.setItem("debutChauffeur",String(debut));
+
+ document.getElementById("etat").textContent=
+ "Journée commencée à "+new Date(debut).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
+}
+
+function finJournee(){
+ if(!debut){
+  alert("Commence d'abord ta journée.");
+  return;
+ }
+
+ document.getElementById("etat").textContent=
+ "Fin enregistrée à "+new Date().toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
+
+ alert("Fin de journée enregistrée. Tu peux maintenant sauvegarder ta journée.");
+}
+
+// ENREGISTREMENT JOURNEE
+function enregistrerJournee(){
+ if(!debut){
+  alert("Enregistre d'abord ton début de journée.");
+  return;
+ }
+
+ let fin=Date.now();
+
+ if(fin<debut){
+  alert("Erreur dans les horaires.");
+  return;
+ }
+
+ let pause=Math.max(0,Number(document.getElementById("pause").value)||0);
+ let duree=Math.max(0,(fin-debut)/3600000-pause/60);
+
+ if(duree<=0){
+  alert("La durée de travail doit être positive.");
+  return;
+ }
+
+ let jour={
+  date:new Date(debut).toLocaleDateString("fr-FR"),
+  debut:new Date(debut).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}),
+  fin:new Date(fin).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}),
+  heures:duree,
+  pause:pause,
+  paniers:Math.max(0,Number(document.getElementById("nbPanier").value)||0),
+  pompages:Math.max(0,Number(document.getElementById("nbPompage").value)||0)
+ };
+
+ jours.push(jour);
+ localStorage.setItem("joursChauffeur",JSON.stringify(jours));
+
+ debut=0;
+ localStorage.removeItem("debutChauffeur");
+
+ document.getElementById("message").textContent="Journée enregistrée avec succès !";
+ document.getElementById("etat").textContent="Aucune journée commencée.";
+
+ actualiser();
+}
+
+// PARAMETRES
+function modifierParametres(){
+ profil.taux=Number(document.getElementById("modTaux").value);
+ profil.panier=Number(document.getElementById("modPanier").value);
+ profil.prime=Number(document.getElementById("modPrime").value);
+
+ localStorage.setItem("vehiculeChauffeur",JSON.stringify(profil));
+ actualiser();
+ alert("Paramètres enregistrés !");
+}
+
+// TABLEAU DE BORD
+function actualiser(){
+ if(!profil)return;
+
+ let h=jours.reduce((s,j)=>s+j.heures,0);
+ let p=jours.reduce((s,j)=>s+j.paniers,0);
+ let n=jours.reduce((s,j)=>s+j.pompages,0);
+
+ let salaire=h*profil.taux+p*profil.panier+n*profil.prime;
+
+ document.getElementById("monCamion").textContent=
+ profil.categorie+" • "+profil.marque+" "+profil.modele+
+ (profil.numero?" • "+profil.numero:"")+" • "+profil.pompe;
+
+ document.getElementById("heures").textContent=h.toFixed(2)+" h";
+ document.getElementById("paniers").textContent=p;
+ document.getElementById("pompages").textContent=n;
+ document.getElementById("salaire").textContent=salaire.toFixed(2)+" €";
+
+ document.getElementById("date").textContent=
+ new Date().toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+
+ document.getElementById("modTaux").value=profil.taux;
+ document.getElementById("modPanier").value=profil.panier;
+ document.getElementById("modPrime").value=profil.prime;
+
+ let historique=document.getElementById("historique");
+ historique.innerHTML="";
+
+ if(jours.length===0){
+  historique.innerHTML='<p class="small">Aucune journée enregistrée.</p>';
+ }else{
+  jours.slice().reverse().forEach(function(j){
+   let div=document.createElement("div");
+   div.className="history-item";
+   div.textContent=
+    j.date+" • "+j.heures.toFixed(2)+" h | "+
+    j.debut+" - "+j.fin+" | "+
+    j.paniers+" panier(s) | "+
+    j.pompages+" pompage(s)";
+   historique.appendChild(div);
+  });
+ }
+
+ if(debut){
+  document.getElementById("etat").textContent=
+   "Journée commencée à "+new Date(debut).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
+ }
+}
+
+// DECONNEXION
+function deconnexion(){
+ localStorage.removeItem("sessionChauffeur");
+ afficher("connexion");
+}
+
+// DEMARRAGE
+if(localStorage.getItem("sessionChauffeur") && compte){
+ if(profil){
+  afficher("tableau");
+  actualiser();
+ }else{
+  afficher("vehicule");
+ }
+}else{
+ afficher("connexion");
+}
+
+</script>
+</body>
+</html>
