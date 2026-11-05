@@ -6,79 +6,66 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#080e19">
 <title>Mon Agenda Chauffeur</title>
-
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;
- min-height:100vh;
+ margin:0;min-height:100vh;
  background:linear-gradient(160deg,#101f36,#060b14);
- color:white;
- font-family:Arial,sans-serif;
- padding:20px;
+ color:white;font-family:Arial,sans-serif;padding:15px;
 }
 main{width:100%;max-width:500px;margin:auto}
 header{text-align:center;padding:20px 5px}
 .logo{
- width:105px;height:105px;margin:auto;
- border-radius:26px;
+ width:100px;height:100px;margin:auto;border-radius:25px;
  background:linear-gradient(145deg,#168cff,#0751a8);
  display:flex;align-items:center;justify-content:center;
- font-size:60px;
- box-shadow:0 0 30px #168cff55;
+ font-size:58px;box-shadow:0 0 30px #168cff55;
 }
-h1{font-size:24px;color:#39a6ff;margin:18px 0 8px}
-header p{color:#91a9c5;font-size:11px;letter-spacing:1.5px}
+h1{font-size:23px;color:#39a6ff;margin:18px 0 8px}
+header p{color:#91a9c5;font-size:11px;letter-spacing:1px}
 .card{
  background:#142237;border:1px solid #29415e;
- border-radius:18px;padding:20px;margin:15px 0;
+ border-radius:18px;padding:18px;margin:14px 0;
 }
 h2{margin-top:0;font-size:20px}
-h3{color:#39a6ff}
+h3{color:#39a6ff;font-size:16px;margin-top:22px}
 label{display:block;color:#b9cbe0;font-size:14px;margin-top:14px}
 input,select{
- width:100%;padding:14px;margin-top:7px;
- background:#091321;color:white;
- border:1px solid #38516e;border-radius:10px;
- font-size:16px;
+ width:100%;padding:13px;margin-top:7px;
+ background:#091321;color:white;border:1px solid #38516e;
+ border-radius:10px;font-size:16px;
 }
 button{
- width:100%;padding:15px;margin-top:12px;
- border:0;border-radius:11px;
- background:#168cff;color:white;
- font-size:15px;font-weight:bold;
- cursor:pointer;
+ width:100%;padding:14px;margin-top:12px;border:0;
+ border-radius:11px;background:#168cff;color:white;
+ font-size:15px;font-weight:bold;cursor:pointer;
 }
 .secondary{background:#263d58}
 .danger{background:#923c48}
 .link{
- display:block;text-align:center;
- color:#49aaff;margin-top:18px;font-size:14px;
- cursor:pointer;
+ display:block;text-align:center;color:#49aaff;
+ margin-top:18px;font-size:14px;cursor:pointer;
 }
 .hidden{display:none!important}
 .stat{
- background:#091321;padding:15px;
- border-radius:12px;margin:9px 0;
+ background:#091321;padding:15px;border-radius:12px;margin:9px 0;
 }
 .stat strong{color:#39b6ff;font-size:24px}
 .small{color:#91a9c5;font-size:12px}
-.row{
- display:grid;grid-template-columns:1fr 1fr;gap:10px;
-}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .history-item{
- background:#091321;border-radius:10px;
- padding:13px;margin:9px 0;
- font-size:14px;line-height:1.7;
+ background:#091321;border-radius:10px;padding:13px;
+ margin:9px 0;font-size:14px;line-height:1.7;
 }
-.status{
- text-align:center;color:#39b6ff;
- padding:8px;font-size:14px;
-}
+.status{text-align:center;color:#39b6ff;padding:8px;font-size:14px}
 footer{text-align:center;color:#667d98;font-size:12px;padding:20px}
+.manual{
+ background:#091321;border:1px solid #38516e;
+ border-radius:12px;padding:14px;margin-top:15px;
+}
+.manual h3{margin-top:0}
 </style>
 </head>
-
 <body>
 <main>
 
@@ -88,40 +75,30 @@ footer{text-align:center;color:#667d98;font-size:12px;padding:20px}
  <p>POINTAGE • PANIERS • POMPAGES • SALAIRE</p>
 </header>
 
-<!-- CONNEXION -->
 <section id="connexion" class="card">
  <h2>Bienvenue chauffeur</h2>
  <p class="small">Connecte-toi à ton espace personnel.</p>
-
  <label>Adresse e-mail</label>
  <input id="email" type="email" placeholder="Ton adresse e-mail">
-
  <label>Mot de passe</label>
  <input id="password" type="password" placeholder="Ton mot de passe">
-
  <button onclick="seConnecter()">SE CONNECTER</button>
  <span class="link" onclick="afficher('creation')">Créer mon compte</span>
  <span class="link" onclick="motDePasseOublie()">Mot de passe oublié ?</span>
 </section>
 
-<!-- CREATION DE COMPTE -->
 <section id="creation" class="card hidden">
  <h2>Créer mon compte</h2>
-
  <label>Nom et prénom</label>
  <input id="nom" placeholder="Ton nom">
-
  <label>Adresse e-mail</label>
  <input id="nouvelEmail" type="email" placeholder="Ton adresse e-mail">
-
  <label>Mot de passe (8 caractères minimum)</label>
  <input id="nouveauPassword" type="password" placeholder="Créer un mot de passe">
-
  <button onclick="creerCompte()">CRÉER MON COMPTE</button>
  <span class="link" onclick="afficher('connexion')">Retour à la connexion</span>
 </section>
 
-<!-- CONFIGURATION VEHICULE -->
 <section id="vehicule" class="card hidden">
  <h2>🚛 Mon véhicule</h2>
  <p class="small">Configure ton camion pour accéder à ton agenda.</p>
@@ -162,20 +139,16 @@ footer{text-align:center;color:#667d98;font-size:12px;padding:20px}
  <input id="numero" placeholder="Ex : Camion 12">
 
  <h3>Mes paramètres de salaire</h3>
-
  <label>Taux horaire brut (€)</label>
  <input id="taux" type="number" step="0.01" value="12.80">
-
  <label>Panier repas (€)</label>
  <input id="panier" type="number" step="0.01" value="13">
-
  <label>Prime par pompage (€)</label>
  <input id="prime" type="number" step="0.01" value="10">
 
  <button onclick="enregistrerVehicule()">ENREGISTRER ET CONTINUER</button>
 </section>
 
-<!-- TABLEAU DE BORD -->
 <section id="tableau" class="hidden">
 
  <div class="card">
@@ -184,7 +157,7 @@ footer{text-align:center;color:#667d98;font-size:12px;padding:20px}
   <p id="date" class="status"></p>
 
   <div class="stat">
-   <span class="small">Heures travaillées</span><br>
+   <span class="small">Heures travaillées cumulées</span><br>
    <strong id="heures">0 h</strong>
   </div>
 
@@ -209,17 +182,28 @@ footer{text-align:center;color:#667d98;font-size:12px;padding:20px}
   <h2>⏱️ Mon pointage</h2>
   <p id="etat" class="status">Aucune journée commencée.</p>
 
-  <button onclick="debutJournee()">▶ DÉBUT DE JOURNÉE</button>
-  <button class="secondary" onclick="finJournee()">■ FIN DE JOURNÉE</button>
+  <button onclick="debutJournee()">▶ DÉBUT DE JOURNÉE AUTOMATIQUE</button>
+  <button class="secondary" onclick="finJournee()">■ FIN DE JOURNÉE AUTOMATIQUE</button>
+
+  <div class="manual">
+   <h3>✏️ Saisie manuelle des horaires</h3>
+   <p class="small">Tu peux saisir tes heures directement, sans utiliser les boutons automatiques.</p>
+
+   <label>Début de journée</label>
+   <input id="heureDebutManuelle" type="time">
+
+   <label>Fin de journée</label>
+   <input id="heureFinManuelle" type="time">
+  </div>
 
   <label>Pause en minutes</label>
-  <input id="pause" type="number" value="30">
+  <input id="pause" type="number" value="30" min="0">
 
   <label>Nombre de paniers</label>
-  <input id="nbPanier" type="number" value="1">
+  <input id="nbPanier" type="number" value="1" min="0">
 
   <label>Nombre de pompages</label>
-  <input id="nbPompage" type="number" value="0">
+  <input id="nbPompage" type="number" value="0" min="0">
 
   <button onclick="enregistrerJournee()">ENREGISTRER MA JOURNÉE</button>
   <p id="message" class="status"></p>
@@ -253,12 +237,12 @@ footer{text-align:center;color:#667d98;font-size:12px;padding:20px}
 </main>
 
 <script>
-
 // DONNEES
 let compte = JSON.parse(localStorage.getItem("compteChauffeur") || "null");
 let profil = JSON.parse(localStorage.getItem("vehiculeChauffeur") || "null");
 let jours = JSON.parse(localStorage.getItem("joursChauffeur") || "[]");
 let debut = Number(localStorage.getItem("debutChauffeur") || 0);
+let fin = Number(localStorage.getItem("finChauffeur") || 0);
 
 // NAVIGATION
 function afficher(id){
@@ -278,12 +262,10 @@ function creerCompte(){
   alert("Remplis tous les champs.");
   return;
  }
-
  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
   alert("Adresse e-mail invalide.");
   return;
  }
-
  if(password.length<8){
   alert("Le mot de passe doit contenir 8 caractères minimum.");
   return;
@@ -292,7 +274,6 @@ function creerCompte(){
  compte={nom:nom,email:email,password:password};
  localStorage.setItem("compteChauffeur",JSON.stringify(compte));
  localStorage.setItem("sessionChauffeur",email);
-
  profil=null;
  afficher("vehicule");
 }
@@ -306,14 +287,12 @@ function seConnecter(){
   alert("Crée d'abord ton compte.");
   return;
  }
-
  if(email!==compte.email || password!==compte.password){
   alert("Adresse e-mail ou mot de passe incorrect.");
   return;
  }
 
  localStorage.setItem("sessionChauffeur",email);
-
  profil=JSON.parse(localStorage.getItem("vehiculeChauffeur") || "null");
 
  if(profil){
@@ -324,9 +303,8 @@ function seConnecter(){
  }
 }
 
-// MOT DE PASSE OUBLIE
 function motDePasseOublie(){
- alert("La récupération du mot de passe sera disponible avec le futur système de comptes en ligne.");
+ alert("La récupération du mot de passe sera disponible avec un futur système de comptes en ligne.");
 }
 
 // VEHICULE
@@ -350,7 +328,6 @@ function enregistrerVehicule(){
  };
 
  localStorage.setItem("vehiculeChauffeur",JSON.stringify(profil));
-
  afficher("tableau");
  actualiser();
  alert("Ton véhicule est enregistré !");
@@ -368,7 +345,7 @@ function modifierVehicule(){
  afficher("vehicule");
 }
 
-// POINTAGE
+// POINTAGE AUTOMATIQUE
 function debutJournee(){
  if(debut){
   alert("Une journée est déjà commencée.");
@@ -376,129 +353,110 @@ function debutJournee(){
  }
 
  debut=Date.now();
+ fin=0;
  localStorage.setItem("debutChauffeur",String(debut));
+ localStorage.removeItem("finChauffeur");
 
+ document.getElementById("heureDebutManuelle").value="";
+ document.getElementById("heureFinManuelle").value="";
  document.getElementById("etat").textContent=
- "Journée commencée à "+new Date(debut).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
+ "Journée commencée à "+heureTexte(debut);
 }
 
 function finJournee(){
  if(!debut){
-  alert("Commence d'abord ta journée.");
+  alert("Commence d'abord ta journée avec le bouton automatique.");
   return;
  }
+ fin=Date.now();
+ localStorage.setItem("finChauffeur",String(fin));
 
  document.getElementById("etat").textContent=
- "Fin enregistrée à "+new Date().toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
+ "Fin enregistrée à "+heureTexte(fin);
+ alert("Fin enregistrée. Tu peux sauvegarder ta journée.");
+}
 
- alert("Fin de journée enregistrée. Tu peux maintenant sauvegarder ta journée.");
+function heureTexte(timestamp){
+ return new Date(timestamp).toLocaleTimeString("fr-FR",{
+  hour:"2-digit",minute:"2-digit"
+ });
 }
 
 // ENREGISTREMENT JOURNEE
 function enregistrerJournee(){
- const hDebut = document.getElementById("heureDebutManuelle").value;
+ const hDebut=document.getElementById("heureDebutManuelle").value;
+ const hFin=document.getElementById("heureFinManuelle").value;
 
-  const hFin = document.getElementById("heureFinManuelle").value;
+ let debutCalcul;
+ let finCalcul;
 
-  let debutCalcul;
-
-  let finCalcul;
-
-  if(hDebut || hFin){
-
-    if(!hDebut || !hFin){
-
-      alert("Renseigne les deux horaires manuels.");
-
-      return;
-
-    }
-
-    const maintenant = new Date();
-
-    debutCalcul = new Date(maintenant);
-
-    const [dh, dm] = hDebut.split(":").map(Number);
-
-    debutCalcul.setHours(dh, dm, 0, 0);
-
-    finCalcul = new Date(maintenant);
-
-    const [fh, fm] = hFin.split(":").map(Number);
-
-    finCalcul.setHours(fh, fm, 0, 0);
-
-    if(finCalcul <= debutCalcul){
-
-      finCalcul.setDate(finCalcul.getDate() + 1);
-
-    }
-
-  }else{
-
-    if(!debut){
-
-      alert("Enregistre ton début de journée ou saisis tes horaires.");
-
-      return;
-
-    }
-
-    debutCalcul = new Date(debut);
-
-    finCalcul = new Date();
-
+ if(hDebut || hFin){
+  if(!hDebut || !hFin){
+   alert("Renseigne les deux horaires manuels.");
+   return;
   }
 
-  let pause = Math.max(0, Number(document.getElementById("pause").value) || 0);
+  const maintenant=new Date();
+  debutCalcul=new Date(maintenant);
+  const [dh,dm]=hDebut.split(":").map(Number);
+  debutCalcul.setHours(dh,dm,0,0);
 
-  let duree = Math.max(0, (finCalcul - debutCalcul) / 3600000 - pause / 60);
+  finCalcul=new Date(maintenant);
+  const [fh,fm]=hFin.split(":").map(Number);
+  finCalcul.setHours(fh,fm,0,0);
 
-  if(duree <= 0){
-
-    alert("La durée de travail doit être positive.");
-
-    return;
-
+  if(finCalcul<=debutCalcul){
+   finCalcul.setDate(finCalcul.getDate()+1);
+  }
+ }else{
+  if(!debut){
+   alert("Utilise le pointage automatique ou renseigne les deux horaires manuels.");
+   return;
   }
 
-  let jour = {
+  debutCalcul=new Date(debut);
+  finCalcul=fin ? new Date(fin) : new Date();
+ }
 
-    date: debutCalcul.toLocaleDateString("fr-FR"),
+ if(finCalcul<=debutCalcul){
+  alert("Vérifie tes horaires.");
+  return;
+ }
 
-    debut: debutCalcul.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}),
+ let pause=Math.max(0,Number(document.getElementById("pause").value)||0);
+ let duree=Math.max(0,(finCalcul-debutCalcul)/3600000-pause/60);
 
-    fin: finCalcul.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}),
+ if(duree<=0){
+  alert("La durée de travail doit être positive.");
+  return;
+ }
 
-    heures: duree,
+ let jour={
+  date:debutCalcul.toLocaleDateString("fr-FR"),
+  debut:heureTexte(debutCalcul.getTime()),
+  fin:heureTexte(finCalcul.getTime()),
+  heures:duree,
+  pause:pause,
+  paniers:Math.max(0,Number(document.getElementById("nbPanier").value)||0),
+  pompages:Math.max(0,Number(document.getElementById("nbPompage").value)||0)
+ };
 
-    pause: pause,
+ jours.push(jour);
+ localStorage.setItem("joursChauffeur",JSON.stringify(jours));
 
-    paniers: Math.max(0, Number(document.getElementById("nbPanier").value) || 0),
+ debut=0;
+ fin=0;
+ localStorage.removeItem("debutChauffeur");
+ localStorage.removeItem("finChauffeur");
 
-    pompages: Math.max(0, Number(document.getElementById("nbPompage").value) || 0)
+ document.getElementById("heureDebutManuelle").value="";
+ document.getElementById("heureFinManuelle").value="";
+ document.getElementById("message").textContent="Journée enregistrée avec succès !";
+ document.getElementById("etat").textContent="Aucune journée commencée.";
 
-  };
-
-  jours.push(jour);
-
-  localStorage.setItem("joursChauffeur", JSON.stringify(jours));
-
-  debut = 0;
-
-  localStorage.removeItem("debutChauffeur");
-
-  document.getElementById("heureDebutManuelle").value = "";
-
-  document.getElementById("heureFinManuelle").value = "";
-
-  document.getElementById("message").textContent = "Journée enregistrée avec succès !";
-
-  document.getElementById("etat").textContent = "Aucune journée commencée.";
-
-  actualiser();
-
+ actualiser();
 }
+
 // PARAMETRES
 function modifierParametres(){
  profil.taux=Number(document.getElementById("modTaux").value);
@@ -517,7 +475,6 @@ function actualiser(){
  let h=jours.reduce((s,j)=>s+j.heures,0);
  let p=jours.reduce((s,j)=>s+j.paniers,0);
  let n=jours.reduce((s,j)=>s+j.pompages,0);
-
  let salaire=h*profil.taux+p*profil.panier+n*profil.prime;
 
  document.getElementById("monCamion").textContent=
@@ -530,7 +487,9 @@ function actualiser(){
  document.getElementById("salaire").textContent=salaire.toFixed(2)+" €";
 
  document.getElementById("date").textContent=
- new Date().toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+ new Date().toLocaleDateString("fr-FR",{
+  weekday:"long",day:"numeric",month:"long",year:"numeric"
+ });
 
  document.getElementById("modTaux").value=profil.taux;
  document.getElementById("modPanier").value=profil.panier;
@@ -556,7 +515,8 @@ function actualiser(){
 
  if(debut){
   document.getElementById("etat").textContent=
-   "Journée commencée à "+new Date(debut).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
+   fin ? "Fin enregistrée à "+heureTexte(fin) :
+   "Journée commencée à "+heureTexte(debut);
  }
 }
 
@@ -577,7 +537,6 @@ if(localStorage.getItem("sessionChauffeur") && compte){
 }else{
  afficher("connexion");
 }
-
 </script>
 </body>
 </html>
